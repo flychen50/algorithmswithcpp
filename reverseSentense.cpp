@@ -11,7 +11,7 @@ char* reverseSentense( char* src){
   int wordpos,letterpos,sentenselen;
   cout<<src<<endl;
   for(wordpos=0,letterpos=0;*src!='\0';src++){
-    if(*src==' '){
+    if((*src==' ')|(*(src-1)==' ')){
      
       // printf("%s",twoArray[wordpos]);
       wordpos++;
@@ -41,7 +41,7 @@ char* reverseSentense( char* src){
   return reverse;
 }
 int main(int argc,char** argv){
-  char* sentense = "I am a stundent";
+  char* sentense = "I's am a stundent";
   cout<<"reverse sentense:"<<reverseSentense(sentense)<<std::endl;
 
 
