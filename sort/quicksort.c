@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 typedef int Item;
-#define key(A) (A)
-#define less(A,B) (key(A)<key(B))
+#define less(A,B) ((A)<(B))
 #define exch(A,B) {Item t = A;A=B;B=t;}
 int partion(Item a[],int l,int r){
   int i = l-1,j = r;Item v = a[r];
