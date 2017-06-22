@@ -4,7 +4,7 @@ typedef int Item;
 #define less(A,B) ((A)<(B))
 #define exch(A,B) {Item t = A;A=B;B=t;}
 int partion(Item a[],int l,int r){
-  int i = l-1,j = r;Item v = a[r];
+  int i=l-1,j = r;Item v = a[r];
   for(;;){
     while(less(a[++i],v));
     while(less(v,a[--j])) if(j==l) break;

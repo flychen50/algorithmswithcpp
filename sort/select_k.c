@@ -14,23 +14,39 @@ int partion(Item a[],int l,int r){
   exch(a[i],a[r]);
   return i;
 }
-void quicksort(Item a[],int l,int r){
+void select(Item a[],int l,int r,int k){
   int i;
-  if(r<=l) return;
+  if(l>=r) return;
   i = partion(a,l,r);
-  quicksort(a,l,i-1);
-  quicksort(a,i+1,r);
+  if(i>k) select(a,l,i-1,k);
+  if(i<k) select(a,i+1,r,k);
+  if(i==k) printf("select %d\n",a[i]);
+}
+
+void select_no_recursive(Item a[],int l,int r,int k){
+  int i;
+  do{
+    i = partion(a,l,r);
+    if(i>k) r = i-1;
+    if(i<k) l = i+1;
+    if(i==k){
+      printf("select %d\n",a[i]);
+      break;
+    }
+  }while(i!=k);
 }
 int main(int argc,char** argv){
-  int *a = malloc(100*sizeof(int));
-  for(int i=0;i<100;i++){
+  int list_range = atoi(argv[1]);
+  int k = atoi(argv[2]);
+  int *a = malloc(list_range*sizeof(int));
+  for(int i=0;i<list_range;i++){
     a[i] = 10000*(1.0*rand()/RAND_MAX);
-  }
-
-  quicksort(a,0,100);
-  for(int i=0;i<100;i++){
     printf("%d ",a[i]);
   }
-  printf("quicksort\n");
+  select_no_recursive(a,0,list_range-1,k);
+  /* for(int i=0;i<100;i++){ */
+  /*   printf("%d ",a[i]); */
+  /* } */
+  printf("select\n");
   return 0;
 }
