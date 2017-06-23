@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 #include <stdlib.h>
 typedef int Item;
 #define less(A,B) ((A)<(B))
@@ -34,6 +35,18 @@ void insertion_sort(Item a[],int l,int r){
 }
 
 
+void select_sort(Item a[],int l,int r){
+  int i,j;
+  for(i=l;i<r;i++){
+    int min = i;
+    for(j=i+1;j<r;j++){
+      if(less(a[j],a[min])){
+        min = j;
+      }
+    }
+    exch(a[i],a[min]);
+  }
+}
 int main(int argc,char** argv){
   if(argc<2){
     fprintf(stderr,"please input ragne_num");
@@ -45,10 +58,13 @@ int main(int argc,char** argv){
     a[i] = 10000*(1.0*rand()/RAND_MAX);
   }
   //quicksort(a,0,list_range-1);
-  insertion_sort(a,0,list_range-1);
+  time_t start_time = time(NULL);
+  // insertion_sort(a,0,list_range-1);
+  select_sort(a,0,list_range-1);
   for(int i=0;i<list_range;i++){
     printf("%4d ",a[i]);
   }
-  printf("\n");
+  time_t end_time = time(NULL);
+  printf("time %ld\n",end_time-start_time);
   return 0;
 }
