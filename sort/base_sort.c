@@ -33,6 +33,21 @@ void insertion_sort(Item a[],int l,int r){
     }
   }
 }
+void bubble(Item a[],int l,int r){
+  int i,j;
+  for(i=l;i<r;i++){
+    for(j=r;j>i;j--){
+      compexch(a[j-1],a[j])
+        }
+  }
+}
+/**
+ * @name insertion_sort_opt - 
+ * @param a -  a 
+ * @param l - Number of l 
+ * @param r - Number of r 
+ * @return void
+ */
 void insertion_sort_opt(Item a[],int l,int r){
   int i;
   for(i=r;i>l;i--) compexch(a[i],a[i-1]);
@@ -46,14 +61,12 @@ void insertion_sort_opt(Item a[],int l,int r){
   }
 }
 
-
-
-
 void select_sort(Item a[],int l,int r){
   int i,j;
   for(i=l;i<r;i++){
     int min = i;
-    for(j=i+1;j<r;j++){
+    //must j<= r,边界条件
+    for(j=i+1;j<=r;j++){
       if(less(a[j],a[min])){
         min = j;
       }
@@ -62,14 +75,6 @@ void select_sort(Item a[],int l,int r){
   }
 }
 
- void bubble(Item a[],int l,int r){
-   int i,j;
-   for(i=l;i<r;i++){
-     for(j=r;j>i;j--){
-       compexch(a[j-1],a[j])
-     }
-   }
- }
 
 
 
