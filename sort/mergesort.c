@@ -3,34 +3,45 @@
 typedef int Item;
 #define less(A,B) ((A)<(B))
 #define exch(A,B) {Item t = A;A=B;B=t;}
-int partion(Item a[],int l,int r){
-  int i=l-1,j = r;Item v = a[r];
-  for(;;){
-    while(less(a[++i],v));
-    while(less(v,a[--j])) if(j==l) break;
-    if(i>=j) break;
-    exch(a[i],a[j]);
+
+void merge(Item a[],int l,int m ,int r){
+  Item aux[r-l];
+  int i,j,k;
+  for(i = m+1;i>l;i--) aux[i-1] = a[i-1];
+  for(j=m;j<r;j++) aux[r+m-j] = a[j+1];
+  for(k=l;k<=r;k++){
+    if(less(aux[j],aux[i])){
+      a[k] = aux[j--];
+    }else{
+      a[k]= aux[i++];
+    }
   }
-  exch(a[i],a[r]);
-  return i;
 }
-void quicksort(Item a[],int l,int r){
-  int i;
+void mymergesort(Item a[],int l,int r){
+  int m = (l+r)/2;
   if(r<=l) return;
-  i = partion(a,l,r);
-  quicksort(a,l,i-1);
-  quicksort(a,i+1,r);
+  mymergesort(a,l,m);
+  mymergesort(a,m+1,r);
+  merge(a,l,m,r);
 }
+
+
 int main(int argc,char** argv){
-  int *a = malloc(100*sizeof(int));
-  for(int i=0;i<100;i++){
+
+  if(argc<2){
+    fprintf(stderr,"please input ragne_num");
+    return -1;
+  }
+  int list_range = atoi(argv[1]);
+  int *a = malloc(list_range*sizeof(int));
+  for(int i=0;i<list_range;i++){
     a[i] = 10000*(1.0*rand()/RAND_MAX);
   }
 
-  quicksort(a,0,100);
+  mymergesort(a,0,list_range-1);
   for(int i=0;i<100;i++){
     printf("%d ",a[i]);
   }
-  printf("quicksort\n");
+  printf("mergesort\n");
   return 0;
 }
