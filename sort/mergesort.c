@@ -4,24 +4,48 @@ typedef int Item;
 #define less(A,B) ((A)<(B))
 #define exch(A,B) {Item t = A;A=B;B=t;}
 #define min(A,B) ((A)<(B)?(A):(B))
-void merge(Item a[],int l,int m ,int r){
+/* void merge(Item a[],int l,int m ,int r){ */
+/*   Item aux[r-l]; */
+/*   int i,j,k; */
+/*   for(i = m+1;i>l;i--) aux[i-1] = a[i-1]; */
+/*   for(j=m;j<r;j++) aux[r+m-j] = a[j+1]; */
+/*   for(k=l;k<=r;k++){ */
+/*     if(less(aux[j],aux[i])){ */
+/*       a[k] = aux[j--]; */
+/*     }else{ */
+/*       a[k]= aux[i++]; */
+/*     } */
+/*   } */
+/* } */
+
+
+void merge(Item a[],int l,int m,int r){
   Item aux[r-l];
   int i,j,k;
-  for(i = m+1;i>l;i--) aux[i-1] = a[i-1];
-  for(j=m;j<r;j++) aux[r+m-j] = a[j+1];
-  for(k=l;k<=r;k++){
-    if(less(aux[j],aux[i])){
-      a[k] = aux[j--];
+  i = l;
+  j = m+1;
+  k = l;
+  while(i<=m && j <=r){
+    if( less(a[i],a[j]) ){
+      aux[k++] = a[i];
     }else{
-      a[k]= aux[i++];
+      aux[k++] = a[j];
     }
   }
+  while(i<=m) aux[k++] = a[i++];
+  while(j<=r) aux[k++] = a[j++];
+  for(k=l;k<=r;k++){
+    a[k] = aux[k];
+  }
 }
+
+
+
 void mymergesort(Item a[],int l,int r){
   int m = (l+r)/2;
   if(r<=l) return;
   mymergesort(a,l,m);
-  mymergesort(a,m+1,r);
+  /* mymergesort(a,m+1,r); */
   merge(a,l,m,r);
 }
 
@@ -50,7 +74,7 @@ int main(int argc,char** argv){
 
   //  mymergesort(a,0,list_range-1);
   mergeBU(a,0,list_range-1);
-  for(int i=0;i<100;i++){
+  for(int i=0;i<list_range;i++){
     printf("%d ",a[i]);
   }
   printf("mergesort\n");
