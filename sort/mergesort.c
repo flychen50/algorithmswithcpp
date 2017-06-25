@@ -14,13 +14,15 @@ typedef int Item;
 /*       a[k] = aux[j--]; */
 /*     }else{ */
 /*       a[k]= aux[i++]; */
-/*     } */
+/*     } *n/
 /*   } */
 /* } */
 
 
 void merge(Item a[],int l,int m,int r){
-  Item aux[r-l];
+  printf("%d %d %d\n",l,m,r);
+  //0 0 1
+  Item aux[100000];
   int i,j,k;
   i = l;
   j = m+1;
