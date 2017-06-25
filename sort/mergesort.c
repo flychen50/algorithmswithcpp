@@ -29,9 +29,9 @@ void merge(Item a[],int l,int m,int r){
   k = l;
   while(i<=m && j <=r){
     if( less(a[i],a[j]) ){
-      aux[k++] = a[i];
+      aux[k++] = a[i++];
     }else{
-      aux[k++] = a[j];
+      aux[k++] = a[j++];
     }
   }
   while(i<=m) aux[k++] = a[i++];
